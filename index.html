@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAMFA Ai Solutions — No enquiry goes cold again</title>
+<meta name="description" content="KAMFA Ai Solutions builds a fixed-scope intake and follow-up system for small US law firms of 1 to 10 lawyers. A form records every enquiry, a board shows who needs chasing and the fee at risk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ---- colour, named with its hex so nothing is guessed ---- */
+  :root{
+    --cream:#F7F3EC;   /* Warm Cream  - page background */
+    --ink:#141414;     /* Near Black  - body text */
+    --teal:#0F6B6B;    /* Deep Teal   - accent only */
+    --slate:#5A6B7A;   /* Slate Grey  - small labels and quiet lines */
+    --navy:#1B2A3A;    /* Charcoal Navy - dark panels */
+    --white:#FFFFFF;
+    --chrome-cream:#F7F3EC;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%;display:block}
+  a{color:var(--teal)}
+
+  .container{width:100%;max-width:1120px;margin:0 auto;padding:0 22px}
+  .prose{max-width:64ch}
+
+  /* ---- type ---- */
+  h1,h2,h3,.band-headline{
+    font-family:Fraunces,"Iowan Old Style",Georgia,serif;
+    font-weight:500;
+    color:var(--ink);
+    margin:0;
+  }
+  h1{font-size:clamp(2.5rem,7.4vw,4.4rem);line-height:1.03;letter-spacing:-.02em}
+  h2{font-size:clamp(1.85rem,4.4vw,2.9rem);line-height:1.1;letter-spacing:-.015em}
+  h3{font-size:clamp(1.25rem,2.6vw,1.55rem);line-height:1.25;letter-spacing:-.01em}
+
+  p{margin:0 0 18px}
+  p:last-child{margin-bottom:0}
+
+  .eyebrow{
+    font-family:Inter,sans-serif;
+    font-size:.78rem;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--slate);
+    margin:0 0 14px;
+  }
+  .accent{color:var(--teal)}
+  .lede{font-size:clamp(1.05rem,2.3vw,1.22rem);color:var(--slate);max-width:52ch}
+
+  /* ---- space ---- */
+  .section{padding:56px 0}
+  .section-tight{padding:44px 0}
+  @media (min-width:768px){
+    .section{padding:96px 0}
+    .section-tight{padding:72px 0}
+  }
+  @media (min-width:1100px){
+    .section{padding:120px 0}
+  }
+
+  /* ---- header ---- */
+  .site-head{border-bottom:1px solid rgba(90,107,122,.22);background:var(--cream)}
+  .head-inner{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+  .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+  .brand-mark{height:40px;width:auto;border-radius:6px}
+  .brand-name{font-family:Fraunces,Georgia,serif;font-size:1.2rem;line-height:1.1;letter-spacing:-.01em}
+  @media (max-width:600px){.brand-mark{height:34px}.brand-name{font-size:1.05rem}}
+
+  /* ---- hero ---- */
+  .hero{padding-top:34px;padding-bottom:52px}
+  .hero-copy h1{margin-bottom:20px}
+  .hero-copy .lede{margin-bottom:30px}
+  .hero-media{margin-top:34px}
+  .hero-media img{
+    width:100%;height:auto;
+    border-radius:16px;
+    object-fit:cover;
+    aspect-ratio:1376/768;
+  }
+  @media (min-width:900px){
+    .hero{
+      min-height:calc(100vh - 80px);
+      display:flex;align-items:center;
+      padding-top:26px;padding-bottom:76px;
+    }
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+    .hero-media{margin-top:0}
+    .hero-media img{height:68vh;min-height:400px;aspect-ratio:auto}
+  }
+
+  /* ---- buttons ---- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:50px;
+    padding:14px 26px;
+    border-radius:999px;
+    font-family:Inter,sans-serif;
+    font-size:1rem;font-weight:600;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:background-color .15s ease,border-color .15s ease,color .15s ease;
+  }
+  .btn-primary{background:var(--teal);color:var(--chrome-cream)}
+  .btn-primary:hover{background:#0c5a5a}
+  .btn-secondary{background:transparent;color:var(--teal);border-color:var(--teal)}
+  .btn-secondary:hover{background:rgba(15,107,107,.07)}
+  .btn-quiet{background:transparent;color:var(--ink);border-color:rgba(90,107,122,.4)}
+  .btn-quiet:hover{border-color:var(--ink)}
+
+  /* ---- section two: the problem ---- */
+  .quotes{list-style:none;margin:0;padding:0;display:grid;gap:26px}
+  .quotes li{
+    border-left:2px solid var(--teal);
+    padding-left:22px;
+    font-family:Fraunces,Georgia,serif;
+    font-size:clamp(1.2rem,3vw,1.65rem);
+    line-height:1.35;
+    color:var(--ink);
+  }
+  @media (min-width:900px){.quotes{grid-template-columns:1fr 1fr;gap:34px 48px}}
+
+  /* ---- the band (service shot stand-in) ---- */
+  .band{background:var(--navy);color:var(--chrome-cream);padding:64px 0}
+  .band .container{display:grid;gap:28px;align-items:center}
+  .band-logo{height:64px;width:auto;border-radius:10px}
+  .band-headline{
+    color:var(--chrome-cream);
+    font-size:clamp(1.5rem,3.6vw,2.35rem);
+    line-height:1.18;
+    letter-spacing:-.015em;
+    max-width:22ch;
+  }
+  @media (min-width:820px){
+    .band{padding:88px 0}
+    .band .container{grid-template-columns:auto 1fr;gap:56px}
+    .band-headline{max-width:26ch}
+  }
+
+  /* ---- section three: services ---- */
+  .cards{display:grid;gap:20px;margin-top:40px}
+  .card{
+    background:var(--white);
+    border:1px solid rgba(90,107,122,.18);
+    border-radius:16px;
+    padding:34px 30px;
+  }
+  .card svg{width:26px;height:26px;color:var(--teal);margin-bottom:22px}
+  .card h3{margin-bottom:0}
+  @media (min-width:820px){.cards{grid-template-columns:repeat(3,1fr);gap:22px}}
+
+  .price{
+    margin-top:36px;
+    background:var(--white);
+    border:1px solid rgba(90,107,122,.18);
+    border-radius:16px;
+    padding:30px;
+    display:grid;gap:6px;
+  }
+  .price-amount{font-family:Fraunces,Georgia,serif;font-size:clamp(1.6rem,3.4vw,2.1rem);line-height:1.1}
+  .price-note{color:var(--slate);font-size:1rem;margin:0}
+
+  /* ---- section four: steps ---- */
+  .steps{list-style:none;margin:44px 0 0;padding:0;display:grid;gap:38px;counter-reset:step}
+  .steps li{border-top:1px solid rgba(15,107,107,.5);padding-top:22px}
+  .step-num{
+    display:block;
+    font-family:Inter,sans-serif;
+    font-size:.8rem;font-weight:600;letter-spacing:.14em;
+    color:var(--slate);
+    margin-bottom:12px;
+  }
+  .steps p{margin:0;font-size:1.1rem;max-width:34ch}
+  @media (min-width:820px){.steps{grid-template-columns:repeat(3,1fr);gap:44px}}
+
+  /* ---- slots ---- */
+  .slot-intro{color:var(--slate);margin-bottom:8px;font-size:1rem}
+  .slot{
+    display:inline-block;
+    margin:0 0 30px;
+    padding:10px 16px;
+    border:1px dashed var(--teal);
+    border-radius:8px;
+    color:var(--slate);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.95rem;
+    letter-spacing:.02em;
+  }
+
+  /* ---- section five: about ---- */
+  .about-name{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+  .avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+  .about-grid{display:grid;gap:40px}
+  .about-media img{border-radius:16px;width:100%;height:auto}
+  @media (min-width:900px){
+    .about-grid{grid-template-columns:1.75fr 1fr;gap:64px;align-items:start}
+    .about-media{margin-top:6px}
+  }
+
+  /* ---- section six: contact ---- */
+  .contact{background:var(--white);border-top:1px solid rgba(90,107,122,.18)}
+  .contact-actions{display:grid;gap:14px;margin-top:34px;max-width:420px}
+  .contact-actions .btn{width:100%}
+  .contact-note{color:var(--slate);font-size:1rem;margin-top:22px;max-width:52ch}
+
+  /* ---- footer ---- */
+  .site-foot{background:var(--navy);color:var(--chrome-cream);padding:44px 0}
+  .foot-inner{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:flex-start}
+  .foot-logo{height:38px;width:auto;border-radius:6px}
+  .foot-name{font-family:Fraunces,Georgia,serif;font-size:1.15rem;margin:0}
+  .foot-tag{color:rgba(247,243,236,.72);font-size:.95rem;margin:4px 0 0}
+</style>
+</head>
+<body id="top">
+
+<header class="site-head">
+  <div class="container head-inner">
+    <a class="brand" href="#top" aria-label="KAMFA Ai Solutions, back to the top">
+      <img class="brand-mark" src="images/logo-mark.jpg" width="392" height="391" alt="KAMFA Ai Solutions logo">
+      <span class="brand-name">KAMFA Ai Solutions</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- SECTION ONE -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1>No enquiry goes <span class="accent">cold</span> again.</h1>
+        <p class="lede">KAMFA Ai Solutions builds a fixed-scope intake and follow-up system for small US law firms of 1 to 10 lawyers.</p>
+        <a class="btn btn-primary" href="https://cal.com/faz-shab-kamfa/intake-enquire">Book a 20 minute call</a>
+      </div>
+      <div class="hero-media">
+        <img src="images/speaking.jpeg" width="1376" height="768" alt="Shabir Zainudeen presenting the KAMFA Ai Solutions follow-up board on a large screen during a meeting">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION TWO -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">The problem</p>
+      <h2 class="prose">This is what it sounds like inside a small firm.</h2>
+      <ul class="quotes" style="margin-top:40px">
+        <li>&ldquo;We get enquiries by web form, email and phone, and nobody logs them.&rdquo;</li>
+        <li>&ldquo;Follow-ups slip.&rdquo;</li>
+        <li>&ldquo;Clients sit on documents for weeks.&rdquo;</li>
+        <li>&ldquo;My fee earner does admin instead of billable work.&rdquo;</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- THE BAND -->
+  <section class="band">
+    <div class="container">
+      <img class="band-logo" src="images/logo-dark.jpeg" width="1376" height="768" alt="KAMFA Ai Solutions logo">
+      <p class="band-headline">Your Attorneys Are Losing $50,000+ a Year &mdash; Not to Competitors, but to Paperwork</p>
+    </div>
+  </section>
+
+  <!-- SECTION THREE -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">What you get</p>
+      <h2 class="prose">Three pieces, one system.</h2>
+
+      <div class="cards">
+        <article class="card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+            <path d="M8 8h8M8 12h8M8 16h5"></path>
+          </svg>
+          <h3>New enquiry form that never loses a lead.</h3>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect>
+            <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect>
+            <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect>
+            <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect>
+          </svg>
+          <h3>Intake follow-up board with money at risk.</h3>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 6h12M8 12h12M8 18h12"></path>
+            <path d="M4 6h.01M4 12h.01M4 18h.01"></path>
+          </svg>
+          <h3>Monday digest of small US law firms hiring intake staff.</h3>
+        </article>
+      </div>
+
+      <div class="price">
+        <span class="price-amount">$1,500 one time</span>
+        <p class="price-note">It covers the whole build.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION FOUR -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2 class="prose">Three steps.</h2>
+
+      <ol class="steps">
+        <li>
+          <span class="step-num">Step one</span>
+          <p>The form records every enquiry.</p>
+        </li>
+        <li>
+          <span class="step-num">Step two</span>
+          <p>The board shows who needs chasing and the fee at risk.</p>
+        </li>
+        <li>
+          <span class="step-num">Step three</span>
+          <p>The Monday digest names firms worth calling.</p>
+        </li>
+      </ol>
+
+      <div style="margin-top:52px">
+        <p class="slot-intro">How long the build takes:</p>
+        <p class="slot">[YOUR TIMELINE]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION FIVE -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <p class="eyebrow">Who you are working with</p>
+        <div class="about-name">
+          <img class="avatar" src="images/profile.jpg" width="1024" height="1030" alt="Portrait of Shabir Zainudeen">
+          <h2>Shabir Zainudeen</h2>
+        </div>
+        <p class="prose">I build one system for small US law firms: everything that comes in gets recorded, everything that needs chasing gets chased, and nothing sits in an inbox waiting for a quiet afternoon.</p>
+        <p class="prose" style="margin-bottom:34px">I started KAMFA Ai Solutions because I saw small firms lose good clients to a missed follow-up. That is a fixable problem, and one simple system fixes it.</p>
+
+        <p class="slot-intro">What that has meant for the firms using it:</p>
+        <p class="slot">[YOUR RESULT]</p>
+
+        <p class="slot-intro">And in a client&rsquo;s own words:</p>
+        <p class="slot">[CLIENT QUOTE]</p>
+      </div>
+
+      <figure class="about-media" style="margin:0">
+        <img src="images/working.jpeg" width="1024" height="1024" alt="Shabir Zainudeen working at his desk with the KAMFA client intake board open on his laptop">
+      </figure>
+    </div>
+  </section>
+
+  <!-- SECTION SIX -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <p class="eyebrow">Start here</p>
+      <h2 class="prose">Let&rsquo;s talk.</h2>
+      <p class="lede" style="margin-top:18px">Book a call and we will look at how enquiries reach your firm now.</p>
+
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="https://cal.com/faz-shab-kamfa/intake-enquire">Book a 20 minute call</a>
+        <a class="btn btn-secondary" href="https://wa.me/971551018507?text=Hi%20Shabir%2C%20I%20found%20the%20KAMFA%20Ai%20Solutions%20page.%20I%27d%20like%20to%20talk%20about%20the%20intake%20and%20follow-up%20system%20for%20my%20firm.">Message me on WhatsApp</a>
+        <a class="btn btn-quiet" href="mailto:fazshab65@gmail.com?subject=Enquiry%20about%20KAMFA%20Ai%20Solutions">Email me</a>
+      </div>
+
+      <p class="contact-note">WhatsApp and email both reach me directly.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="container foot-inner">
+    <img class="foot-logo" src="images/logo-mark.jpg" width="392" height="391" alt="KAMFA Ai Solutions logo">
+    <div>
+      <p class="foot-name">KAMFA Ai Solutions</p>
+      <p class="foot-tag">No enquiry goes cold again.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
